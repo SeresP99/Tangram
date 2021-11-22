@@ -13,12 +13,11 @@ namespace TangramProject.Classes.Pieces
 
         //2√2 ≈ 2.8
 
-        public TanTriangle(TanTriangleSize type, Color color, double scale, float X, float Y)
+        public TanTriangle(TanTriangleSize type, Color color, float X, float Y)
         {
-
+            scale = 98;
             this.type = type;
             this.color = color;
-            this.scale = scale;
             this.X = X;
             this.Y = Y;
 
@@ -42,19 +41,61 @@ namespace TangramProject.Classes.Pieces
 
             CalculateAltitude();
             CalculateArea();
-            A = new PointF(0, 0);
-            B = new PointF((float)sideA, 0);
-            C = new PointF((float)(sideA / 2), (float)altitude);
-
-            OffsetForRotation();
+            SetOrResetTriangle();
             GetCenter();
+            InitializeBitmap();
+        }
 
-            bitmap = new Bitmap((int)sideA + 2, (int)sideA + 2);
+        private void SetOrResetTriangle()
+        {
+            A = new PointF(0, 0);
+            B = new PointF((int)sideA, 0);
+            C = new PointF((int)(sideA / 2), (int)altitude);
+
+            OffsetTriangleForRotation();
+        }
+
+        public void OffsetTriangleForRotation()
+        {
+            switch (type)
+            {
+                case TanTriangleSize.LARGE: //DONE'D
+                    A.Y += 80;
+                    B.Y += 80;
+                    C.Y += 80;
+                    A.X += 10;
+                    B.X += 10;
+                    C.X += 10;
+                    break;
+                case TanTriangleSize.MEDIUM:
+                    A.Y += 55;
+                    B.Y += 55;
+                    C.Y += 55;
+                    A.X += 10;
+                    B.X += 10;
+                    C.X += 10;
+                    break;
+                case TanTriangleSize.SMALL:
+                    A.Y += 40;
+                    B.Y += 40;
+                    C.Y += 40;
+                    A.X += 10;
+                    B.X += 10;
+                    C.X += 10;
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+        private void InitializeBitmap()
+        {
+            bitmap = new Bitmap((int)sideA + 20, (int)sideA + 20);
             bitmap.RefreshFrame();
             bitmap.DrawTan(this);
         }
 
-        //DONE
         public double CalculateAltitude()
         {
             altitude = (float)(sideB * sideB) / 2;
@@ -102,28 +143,45 @@ namespace TangramProject.Classes.Pieces
         }
 
         //DONE
-        public void RotateBy90()
+        public void Rotate()
         {
-            A = RotatePoint(A, center, 90);
-            B = RotatePoint(B, center, 90);
-            C = RotatePoint(C, center, 90);
+            float rotationAmount = 45;
+            A = RotatePoint(A, center, rotationAmount);
+            B = RotatePoint(B, center, rotationAmount);
+            C = RotatePoint(C, center, rotationAmount);
+
+            rotation += rotationAmount;
+            if (rotation == 360)
+                SetOrResetTriangle();
 
             bitmap.RefreshFrame();
             bitmap.DrawTan(this);
+
+            bitmap.SetPixel((int)center.X, (int)center.Y, Color.Red);
+            bitmap.SetPixel((int)center.X + 1, (int)center.Y, Color.Red);
+            bitmap.SetPixel((int)center.X + 2, (int)center.Y, Color.Red);
+            bitmap.SetPixel((int)center.X - 1, (int)center.Y, Color.Red);
+            bitmap.SetPixel((int)center.X + 2, (int)center.Y, Color.Red);
         }
 
         //DONE
-        public PointF RotatePoint(PointF pointToRotate, PointF center, double angleInDegrees)
+        public PointF RotatePoint(PointF pointToRotate, PointF center, float angleInDegrees)
         {
-            double angleInRadians = angleInDegrees * (Math.PI / 180);
+            float angleInRadians = angleInDegrees * (float)Math.PI / 180;
+            //float wasn't enough accurate in this case, caused distortion
             double cosTheta = Math.Cos(angleInRadians);
             double sinTheta = Math.Sin(angleInRadians);
 
 
             return new PointF
             {
-                X = (int)(cosTheta * (pointToRotate.X - center.X) - sinTheta * (pointToRotate.Y - center.Y) + center.X),
-                Y = (int)(sinTheta * (pointToRotate.X - center.X) + cosTheta * (pointToRotate.Y - center.Y) + center.Y)
+                X = (float)
+                (cosTheta * (pointToRotate.X - center.X) - 
+                sinTheta * (pointToRotate.Y - center.Y) + center.X),
+
+                Y = (float)
+                (sinTheta * (pointToRotate.X - center.X) + 
+                cosTheta * (pointToRotate.Y - center.Y) + center.Y)
             };
         }
 
@@ -133,13 +191,8 @@ namespace TangramProject.Classes.Pieces
             center = new PointF(A.X + (float)sideA / 2, A.Y + (float)altitude / 2);
         }
 
-        //DONE
-        public void OffsetForRotation()
-        {
-            A.Y += 35;
-            B.Y += 35;
-            C.Y += 35;
-        }
+        
+        
 
     }
 }
