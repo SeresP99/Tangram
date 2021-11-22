@@ -39,12 +39,6 @@ namespace TangramProject.Classes.Pieces
             //RefreshPoints();
         }
 
-        public override void RefreshPoints()
-        {
-            A = new PointF(0 + X, 0 + Y);
-            B = new PointF(0 + X, (float)sideA + Y);
-            C = new PointF((float)sideA + X, (float)sideA + Y);
-            D = new PointF((float)sideA + X, 0 + Y);
-        }
+        
     }
 }

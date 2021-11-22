@@ -28,12 +28,12 @@ namespace TangramProject.Classes.Game
         public Tangram(double scale)
         {
             this.scale = scale;
-            largeTriangle1 = new TanTriangle(TanTriangleSize.LARGE, Color.Blue, scale, 997, 629);
-            largeTriangle2 = new TanTriangle(TanTriangleSize.LARGE, Color.Orange, scale, 1000, 461);
-            mediumTriangle1 = new TanTriangle(TanTriangleSize.MEDIUM, Color.Gray, scale, 1047, 334);
-            mediumTriangle2 = new TanTriangle(TanTriangleSize.MEDIUM, Color.Yellow, scale, 1052, 216);
-            smallTriangle1 = new TanTriangle(TanTriangleSize.SMALL, Color.Purple, scale, 1083, 33);
-            smallTriangle2 = new TanTriangle(TanTriangleSize.SMALL, Color.Green, scale, 1087, 131);
+            largeTriangle1 = new TanTriangle(TanTriangleSize.LARGE, Color.Blue,  997, 629);
+            largeTriangle2 = new TanTriangle(TanTriangleSize.LARGE, Color.Orange,  1000, 461);
+            mediumTriangle1 = new TanTriangle(TanTriangleSize.MEDIUM, Color.Gray,  1047, 334);
+            mediumTriangle2 = new TanTriangle(TanTriangleSize.MEDIUM, Color.Yellow,  1052, 216);
+            smallTriangle1 = new TanTriangle(TanTriangleSize.SMALL, Color.Purple,  1083, 33);
+            smallTriangle2 = new TanTriangle(TanTriangleSize.SMALL, Color.Green,  1087, 131);
             square = new TanSquare(Color.Orchid, scale, 846, 420);
             parallelogram = new TanParallelogram(Color.DeepPink, scale, 829, 668);
 

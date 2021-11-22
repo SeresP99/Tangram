@@ -14,6 +14,7 @@ namespace TangramProject.Classes.Pieces
         public Bitmap bitmap;
         public double sideA;
         public double sideB;
+        public double rotation;
 
         public float X, Y;
 

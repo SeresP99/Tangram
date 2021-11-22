@@ -19,7 +19,7 @@ namespace TangramProject.Classes.GraphicsExtensions
                 {
                     bitmap.DrawTriangle(shape);
                 }
-                //bitmap.FillTan(shape);
+                bitmap.FillTan(shape);
         }
 
         static void DrawQuadrilateral(this Bitmap bitmap, Tan quadrilateral)
