@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
+using Tangram.Classes.PointExtensions;
 using TangramProject.Classes.GraphicsExtensions;
 
 namespace TangramProject.Classes.Pieces
@@ -146,9 +147,9 @@ namespace TangramProject.Classes.Pieces
         public void Rotate()
         {
             float rotationAmount = 45;
-            A = RotatePoint(A, center, rotationAmount);
-            B = RotatePoint(B, center, rotationAmount);
-            C = RotatePoint(C, center, rotationAmount);
+            A = A.RotatePoint(center, rotationAmount);
+            B = B.RotatePoint(center, rotationAmount);
+            C = C.RotatePoint(center, rotationAmount);
 
             rotation += rotationAmount;
             if (rotation == 360)
@@ -156,34 +157,10 @@ namespace TangramProject.Classes.Pieces
 
             bitmap.RefreshFrame();
             bitmap.DrawTan(this);
-
-            bitmap.SetPixel((int)center.X, (int)center.Y, Color.Red);
-            bitmap.SetPixel((int)center.X + 1, (int)center.Y, Color.Red);
-            bitmap.SetPixel((int)center.X + 2, (int)center.Y, Color.Red);
-            bitmap.SetPixel((int)center.X - 1, (int)center.Y, Color.Red);
-            bitmap.SetPixel((int)center.X + 2, (int)center.Y, Color.Red);
         }
 
         //DONE
-        public PointF RotatePoint(PointF pointToRotate, PointF center, float angleInDegrees)
-        {
-            float angleInRadians = angleInDegrees * (float)Math.PI / 180;
-            //float wasn't enough accurate in this case, caused distortion
-            double cosTheta = Math.Cos(angleInRadians);
-            double sinTheta = Math.Sin(angleInRadians);
-
-
-            return new PointF
-            {
-                X = (float)
-                (cosTheta * (pointToRotate.X - center.X) - 
-                sinTheta * (pointToRotate.Y - center.Y) + center.X),
-
-                Y = (float)
-                (sinTheta * (pointToRotate.X - center.X) + 
-                cosTheta * (pointToRotate.Y - center.Y) + center.Y)
-            };
-        }
+        
 
         //DONE
         private void GetCenter()

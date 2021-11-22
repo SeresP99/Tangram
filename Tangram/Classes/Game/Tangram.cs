@@ -34,7 +34,7 @@ namespace TangramProject.Classes.Game
             mediumTriangle2 = new TanTriangle(TanTriangleSize.MEDIUM, Color.Yellow, 1052, 216);
             smallTriangle1 = new TanTriangle(TanTriangleSize.SMALL, Color.Purple, 1083, 33);
             smallTriangle2 = new TanTriangle(TanTriangleSize.SMALL, Color.Green, 1087, 131);
-            square = new TanSquare(Color.Orchid, scale, 846, 420);
+            square = new TanSquare(Color.Orchid, 846, 420);
             parallelogram = new TanParallelogram(Color.DeepPink, 829, 668);
 
             setOfTans = new Tan[8]

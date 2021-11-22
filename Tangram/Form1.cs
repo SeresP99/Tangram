@@ -27,17 +27,18 @@ namespace TangramProject
         TanTriangle mediumTriangle;
         TanTriangle largeTriangle;
         TanParallelogram parallelogram;
+        TanSquare square;
 
         public Tangram()
         {
             InitializeComponent();
-            //square = new TanSquare(Color.Purple, 110, 100, 400);
             smallTriangle = new TanTriangle(TanTriangleSize.SMALL, Color.Red, 100, 100);
             mediumTriangle = new TanTriangle(TanTriangleSize.MEDIUM, Color.Blue, 300, 400);
             largeTriangle = new TanTriangle(TanTriangleSize.LARGE, Color.Green, 700, 400);
             parallelogram = new TanParallelogram(Color.BlueViolet, 700, 100);
+            square = new TanSquare(Color.Olive, 600, 250);
             //largeTriangle = new TanTriangle(TanTriangleSize.LARGE, Color.Gold, 110, 300, 400);
-            game = new Classes.Game.Tangram(100);
+            //game = new Classes.Game.Tangram(100);
             /*Bitmap temp = game.GetBitmapOfShape(0);*/
         }
 
@@ -49,6 +50,7 @@ namespace TangramProject
             g.DrawImage(mediumTriangle.bitmap, mediumTriangle.X, mediumTriangle.Y);
             g.DrawImage(largeTriangle.bitmap, largeTriangle.X, largeTriangle.Y);
             g.DrawImage(parallelogram.bitmap, parallelogram.X, parallelogram.Y);
+            g.DrawImage(square.bitmap, square.X, square.Y);
             /*for (int i = 0; i < game.setOfTans.Length; i++)
             {
                 g.DrawImage(game.setOfTans[i].bitmap, game.setOfTans[i].X, game.setOfTans[i].Y);
@@ -118,6 +120,7 @@ namespace TangramProject
                     mediumTriangle.Rotate();
                     largeTriangle.Rotate();
                     parallelogram.Rotate();
+                    square.Rotate();
                     canvas.Invalidate();
                     break;
                 default:

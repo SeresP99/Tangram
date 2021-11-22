@@ -124,12 +124,6 @@ namespace TangramProject.Classes.Pieces
 
             bitmap.RefreshFrame();
             bitmap.DrawTan(this);
-
-            bitmap.SetPixel((int)center.X, (int)center.Y, Color.Red);
-            bitmap.SetPixel((int)center.X + 1, (int)center.Y, Color.Red);
-            bitmap.SetPixel((int)center.X + 2, (int)center.Y, Color.Red);
-            bitmap.SetPixel((int)center.X - 1, (int)center.Y, Color.Red);
-            bitmap.SetPixel((int)center.X + 2, (int)center.Y, Color.Red);
         }
     }
 }

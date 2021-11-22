@@ -90,14 +90,15 @@ namespace TangramProject.Classes.GraphicsExtensions
             {
                 for (int j = 0; j < bitmap.Height; j++)
                 {
-                    bitmap.SetPixel(i, j, Color.AliceBlue);
+                    bitmap.SetPixel(i, j, Color.FromArgb(0, 0, 0, 0));
                 }
             }
         }
 
         public static bool ColorIsTheSameAs(this Color color1, Color color2)
         {
-            return color1.R == color2.R &&
+            return  color1.A == color2.A &&
+                    color1.R == color2.R &&
                     color1.G == color2.G &&
                     color1.B == color2.B;
         }
