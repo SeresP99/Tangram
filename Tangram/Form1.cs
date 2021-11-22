@@ -26,6 +26,7 @@ namespace TangramProject
         TanTriangle smallTriangle;
         TanTriangle mediumTriangle;
         TanTriangle largeTriangle;
+        TanParallelogram parallelogram;
 
         public Tangram()
         {
@@ -34,6 +35,7 @@ namespace TangramProject
             smallTriangle = new TanTriangle(TanTriangleSize.SMALL, Color.Red, 100, 100);
             mediumTriangle = new TanTriangle(TanTriangleSize.MEDIUM, Color.Blue, 300, 400);
             largeTriangle = new TanTriangle(TanTriangleSize.LARGE, Color.Green, 700, 400);
+            parallelogram = new TanParallelogram(Color.BlueViolet, 700, 100);
             //largeTriangle = new TanTriangle(TanTriangleSize.LARGE, Color.Gold, 110, 300, 400);
             game = new Classes.Game.Tangram(100);
             /*Bitmap temp = game.GetBitmapOfShape(0);*/
@@ -46,6 +48,7 @@ namespace TangramProject
             g.DrawImage(smallTriangle.bitmap, smallTriangle.X, smallTriangle.Y);
             g.DrawImage(mediumTriangle.bitmap, mediumTriangle.X, mediumTriangle.Y);
             g.DrawImage(largeTriangle.bitmap, largeTriangle.X, largeTriangle.Y);
+            g.DrawImage(parallelogram.bitmap, parallelogram.X, parallelogram.Y);
             /*for (int i = 0; i < game.setOfTans.Length; i++)
             {
                 g.DrawImage(game.setOfTans[i].bitmap, game.setOfTans[i].X, game.setOfTans[i].Y);
@@ -114,6 +117,7 @@ namespace TangramProject
                     smallTriangle.Rotate();
                     mediumTriangle.Rotate();
                     largeTriangle.Rotate();
+                    parallelogram.Rotate();
                     canvas.Invalidate();
                     break;
                 default:
