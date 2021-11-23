@@ -34,6 +34,7 @@ namespace TangramProject.Classes.Pieces
 
         public abstract bool IsPointInArea(Point p);
         public abstract void Move(Point cursorLocation, float dx, float dy);
+        public abstract void Rotate();
 
         //2√2 ≈ 2.8
 

@@ -84,10 +84,10 @@ namespace TangramProject.Classes.Pieces
 
         public override bool IsPointInArea(Point p)
         {
-            PointF absA = new PointF((float)offset + X, 0 + Y);
-            PointF absB = new PointF(0 + X, (float)altitude + Y);
-            PointF absC = new PointF((float)sideA + X, (float)altitude + Y);
-            PointF absD = new PointF((float)(offset + sideA) + X, 0 + Y);
+            PointF absA = new PointF(A.X + X, A.Y + Y);
+            PointF absB = new PointF(B.X + X, B.Y + Y);
+            PointF absC = new PointF(C.X + X, C.Y + Y);
+            PointF absD = new PointF(D.X + X, D.Y + Y);
 
             float subArea1 = SubTriangleArea(p, absA, absB);
             float subArea2 = SubTriangleArea(p, absB, absC);
@@ -110,7 +110,7 @@ namespace TangramProject.Classes.Pieces
             this.Y = cursorLocation.Y - dy;
         }
 
-        public void Rotate()
+        public override void Rotate()
         {
             float rotationAmount = 45;
             A = A.RotatePoint(center, rotationAmount);

@@ -114,9 +114,9 @@ namespace TangramProject.Classes.Pieces
         public override bool IsPointInArea(Point p)
         {
             //calculate location of points relative to the whole board
-            PointF absA = new PointF(0 + X, 0 + Y);
-            PointF absB = new PointF((float)sideA + X, 0 + Y);
-            PointF absC = new PointF((float)(sideA / 2) + X, (float)altitude + Y);
+            PointF absA = new PointF(A.X + X, A.Y + Y);
+            PointF absB = new PointF(B.X + X, B.Y + Y);
+            PointF absC = new PointF(C.X + X, C.Y + Y);
 
             float subArea1 = SubTriangleArea(p, absB, absC);
             float subArea2 = SubTriangleArea(absA, p, absC);
@@ -144,7 +144,7 @@ namespace TangramProject.Classes.Pieces
         }
 
         //DONE
-        public void Rotate()
+        public override void Rotate()
         {
             float rotationAmount = 45;
             A = A.RotatePoint(center, rotationAmount);

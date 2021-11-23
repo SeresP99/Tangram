@@ -23,42 +23,21 @@ namespace TangramProject
         float dx, dy;
         int grabbedPiece;
 
-        TanTriangle smallTriangle;
-        TanTriangle mediumTriangle;
-        TanTriangle largeTriangle;
-        TanParallelogram parallelogram;
-        TanSquare square;
 
         public Tangram()
         {
             InitializeComponent();
-            smallTriangle = new TanTriangle(TanTriangleSize.SMALL, Color.Red, 100, 100);
-            mediumTriangle = new TanTriangle(TanTriangleSize.MEDIUM, Color.Blue, 300, 400);
-            largeTriangle = new TanTriangle(TanTriangleSize.LARGE, Color.Green, 700, 400);
-            parallelogram = new TanParallelogram(Color.BlueViolet, 700, 100);
-            square = new TanSquare(Color.Olive, 600, 250);
-            //largeTriangle = new TanTriangle(TanTriangleSize.LARGE, Color.Gold, 110, 300, 400);
-            //game = new Classes.Game.Tangram(100);
-            /*Bitmap temp = game.GetBitmapOfShape(0);*/
+            game = new Classes.Game.Tangram(100);
         }
 
 
         private void canvas_Paint(object sender, PaintEventArgs e)
         {
             g = e.Graphics;
-            g.DrawImage(smallTriangle.bitmap, smallTriangle.X, smallTriangle.Y);
-            g.DrawImage(mediumTriangle.bitmap, mediumTriangle.X, mediumTriangle.Y);
-            g.DrawImage(largeTriangle.bitmap, largeTriangle.X, largeTriangle.Y);
-            g.DrawImage(parallelogram.bitmap, parallelogram.X, parallelogram.Y);
-            g.DrawImage(square.bitmap, square.X, square.Y);
-            /*for (int i = 0; i < game.setOfTans.Length; i++)
+            for (int i = 0; i < game.setOfTans.Length; i++)
             {
                 g.DrawImage(game.setOfTans[i].bitmap, game.setOfTans[i].X, game.setOfTans[i].Y);
-            }*/
-            /*g.DrawImage(square.bitmap, square.X, square.Y);
-            g.DrawImage(smallTriangle.bitmap, smallTriangle.X, smallTriangle.Y);
-            g.DrawImage(mediumTriangle.bitmap, mediumTriangle.X, mediumTriangle.Y);
-            g.DrawImage(largeTriangle.bitmap, largeTriangle.X, largeTriangle.Y);*/
+            }
         }
 
         private void canvas_MouseDown(object sender, MouseEventArgs e)
@@ -66,7 +45,7 @@ namespace TangramProject
             switch (e.Button)
             {
                 case MouseButtons.Left:
-                    /*for (int i = 0; i < game.setOfTans.Length; i++)
+                    for (int i = 0; i < game.setOfTans.Length; i++)
                     {
                         if (game.setOfTans[i].IsPointInArea(e.Location))
                         {
@@ -75,7 +54,7 @@ namespace TangramProject
                             dx = e.X - game.setOfTans[i].X;
                             dy = e.Y - game.setOfTans[i].Y;
                         }
-                    }*/
+                    }
                     break;
                 case MouseButtons.Right:
                     break;
@@ -113,18 +92,17 @@ namespace TangramProject
 
         private void RotateKeypress(object sender, KeyPressEventArgs e)
         {
-            switch (e.KeyChar)
+            if (gotcha)
             {
-                case 'r':
-                    smallTriangle.Rotate();
-                    mediumTriangle.Rotate();
-                    largeTriangle.Rotate();
-                    parallelogram.Rotate();
-                    square.Rotate();
-                    canvas.Invalidate();
-                    break;
-                default:
-                    break;
+                switch (e.KeyChar)
+                {
+                    case 'r':
+                        game.setOfTans[grabbedPiece].Rotate();
+                        canvas.Invalidate();
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 

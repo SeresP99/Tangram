@@ -28,14 +28,14 @@ namespace TangramProject.Classes.Game
         public Tangram(double scale)
         {
             this.scale = scale;
-            largeTriangle1 = new TanTriangle(TanTriangleSize.LARGE, Color.Blue, 997, 629);
-            largeTriangle2 = new TanTriangle(TanTriangleSize.LARGE, Color.Orange, 1000, 461);
-            mediumTriangle1 = new TanTriangle(TanTriangleSize.MEDIUM, Color.Gray, 1047, 334);
-            mediumTriangle2 = new TanTriangle(TanTriangleSize.MEDIUM, Color.Yellow, 1052, 216);
-            smallTriangle1 = new TanTriangle(TanTriangleSize.SMALL, Color.Purple, 1083, 33);
-            smallTriangle2 = new TanTriangle(TanTriangleSize.SMALL, Color.Green, 1087, 131);
-            square = new TanSquare(Color.Orchid, 846, 420);
-            parallelogram = new TanParallelogram(Color.DeepPink, 829, 668);
+            largeTriangle1 = new TanTriangle(TanTriangleSize.LARGE, Color.Blue, 50, 50);
+            largeTriangle2 = new TanTriangle(TanTriangleSize.LARGE, Color.Orange, 50, 50);
+            mediumTriangle1 = new TanTriangle(TanTriangleSize.MEDIUM, Color.Gray, 50, 200);
+            mediumTriangle2 = new TanTriangle(TanTriangleSize.MEDIUM, Color.Yellow, 50, 200);
+            smallTriangle1 = new TanTriangle(TanTriangleSize.SMALL, Color.Purple, 50, 400);
+            smallTriangle2 = new TanTriangle(TanTriangleSize.SMALL, Color.Green, 50, 400);
+            square = new TanSquare(Color.Orchid, 400, 50);
+            parallelogram = new TanParallelogram(Color.DeepPink, 400, 200);
 
             setOfTans = new Tan[8]
             {
@@ -48,8 +48,6 @@ namespace TangramProject.Classes.Game
                 square,
                 parallelogram
             };
-
-            //DrawBoard();
         }
 
         public Bitmap GetBitmapOfShape(int i)
