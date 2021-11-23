@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
+using System.Windows.Forms;
 using Tangram.Classes.PointExtensions;
 using TangramProject.Classes.GraphicsExtensions;
 
@@ -14,9 +15,9 @@ namespace TangramProject.Classes.Pieces
 
         //2√2 ≈ 2.8
 
-        public TanTriangle(TanTriangleSize type, Color color, float X, float Y)
+        public TanTriangle(TanTriangleSize type, Color color, float X, float Y, double scale)
         {
-            scale = 98;
+            this.scale = scale;
             this.type = type;
             this.color = color;
             this.X = X;
@@ -61,9 +62,9 @@ namespace TangramProject.Classes.Pieces
             switch (type)
             {
                 case TanTriangleSize.LARGE: //DONE'D
-                    A.Y += 80;
-                    B.Y += 80;
-                    C.Y += 80;
+                    A.Y += 120;
+                    B.Y += 120;
+                    C.Y += 120;
                     A.X += 10;
                     B.X += 10;
                     C.X += 10;
@@ -156,7 +157,11 @@ namespace TangramProject.Classes.Pieces
                 SetOrResetTriangle();
 
             bitmap.RefreshFrame();
-            bitmap.DrawTan(this);
+                bitmap.DrawTan(this);
+            /*catch (Exception e)
+            {
+                MessageBox.Show(e.Message + " \nFailure at shape: " + this.GetType().Name + "\n");
+            }*/
         }
 
         //DONE

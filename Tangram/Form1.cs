@@ -22,18 +22,20 @@ namespace TangramProject
         bool gotcha = false;
         float dx, dy;
         int grabbedPiece;
-
+        //written and tested with:   scale = 215
+        double scale = 215;
 
         public Tangram()
         {
             InitializeComponent();
-            game = new Classes.Game.Tangram(100);
+            game = new Classes.Game.Tangram(scale);
         }
 
 
         private void canvas_Paint(object sender, PaintEventArgs e)
         {
             g = e.Graphics;
+            g.DrawImage(game.map.bitmap, (int)game.map.X, (int)game.map.Y);
             for (int i = 0; i < game.setOfTans.Length; i++)
             {
                 g.DrawImage(game.setOfTans[i].bitmap, game.setOfTans[i].X, game.setOfTans[i].Y);

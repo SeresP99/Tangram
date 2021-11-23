@@ -4,14 +4,15 @@ using System.Text;
 using System.Drawing;
 using TangramProject.Classes.GraphicsExtensions;
 using Tangram.Classes.PointExtensions;
+using System.Windows.Forms;
 
 namespace TangramProject.Classes.Pieces
 {
     class TanParallelogram : Tan
     {
-        public TanParallelogram(Color color, float X, float Y)
+        public TanParallelogram(Color color, float X, float Y, double scale)
         {
-            scale = 98;
+            this.scale = scale;
             this.X = X;
             this.Y = Y;
             this.color = color;
@@ -123,7 +124,14 @@ namespace TangramProject.Classes.Pieces
                 SetOrResetParallelogram();
 
             bitmap.RefreshFrame();
-            bitmap.DrawTan(this);
+            try
+            {
+                bitmap.DrawTan(this);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + " \nFailure at shape: " + this.GetType().Name);
+            }
         }
     }
 }

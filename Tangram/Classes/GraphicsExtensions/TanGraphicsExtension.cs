@@ -2,12 +2,22 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
+using Tangram.Classes.Game;
 using TangramProject.Classes.Pieces;
 
 namespace TangramProject.Classes.GraphicsExtensions
 {
     static class TanGraphicsExtension
     {
+
+        public static void DrawMap(this Bitmap bitmap, Map map)
+        {
+            bitmap.DrawLineMidpoint(Color.Black, Point.Round(map.A), Point.Round(map.B));
+            bitmap.DrawLineMidpoint(Color.Black, Point.Round(map.B), Point.Round(map.C));
+            bitmap.DrawLineMidpoint(Color.Black, Point.Round(map.C), Point.Round(map.D));
+            bitmap.DrawLineMidpoint(Color.Black, Point.Round(map.D), Point.Round(map.A));
+
+        }
 
         public static void DrawTan(this Bitmap bitmap, Tan shape)
         {

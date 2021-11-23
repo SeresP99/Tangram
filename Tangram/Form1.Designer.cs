@@ -39,7 +39,7 @@ namespace TangramProject
             // 
             this.canvas.Location = new System.Drawing.Point(12, 12);
             this.canvas.Name = "canvas";
-            this.canvas.Size = new System.Drawing.Size(1157, 723);
+            this.canvas.Size = new System.Drawing.Size(1240, 657);
             this.canvas.TabIndex = 0;
             this.canvas.TabStop = false;
             this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
@@ -56,7 +56,7 @@ namespace TangramProject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1181, 747);
+            this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.canvas);
             this.Name = "Tangram";
             this.Text = "Form1";
