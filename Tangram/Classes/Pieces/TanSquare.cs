@@ -114,14 +114,18 @@ namespace TangramProject.Classes.Pieces
 
             rotation += rotationAmount;
             if (rotation == 360)
+            {
                 ResetSquare();
+                rotation = 0;
+            }
+
 
             bitmap.RefreshFrame();
             try
             {
                 bitmap.DrawTan(this);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show(e.Message + " \nFailure at shape: " + this.GetType().Name);
             }

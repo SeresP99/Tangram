@@ -26,6 +26,7 @@ namespace TangramProject.Classes.Game
         public readonly double scale;
 
         public Tan[] setOfTans;
+        public WinConditionChecker winChecker;
 
         public Tangram(double scale)
         {
@@ -49,6 +50,8 @@ namespace TangramProject.Classes.Game
                 square,
                 parallelogram
             };
+
+            winChecker = new WinConditionChecker(setOfTans, map, scale);
         }
 
         public Bitmap GetBitmapOfShape(int i)

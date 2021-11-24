@@ -35,7 +35,22 @@ namespace TangramProject.Classes.Pieces
         public abstract bool IsPointInArea(Point p);
         public abstract void Move(Point cursorLocation, float dx, float dy);
         public abstract void Rotate();
-
+        public PointF GetAbsolutePoint(char pointLetter)
+        {
+            switch (pointLetter)
+            {
+                case 'A':
+                    return new PointF(X + A.X, Y + A.Y);
+                case 'B':
+                    return new PointF(X + B.X, Y + B.Y);
+                case 'C':
+                    return new PointF(X + C.X, Y + C.Y);
+                case 'D':
+                    return new PointF(X + D.X, Y + D.Y);
+                default:
+                    throw new Exception("that's a nono");
+            }
+        }
         //2√2 ≈ 2.8
 
         /*public Tan(TanType type, Color color, double scale, float X, float Y)

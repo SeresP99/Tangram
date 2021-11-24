@@ -21,7 +21,7 @@ namespace TangramProject.Classes.Pieces
             sideA = Math.Sqrt(2) * scale;
             sideB = 1 * scale;
 
-            
+
             CalculateParallelogramAltitude();
             CalculateParallelogramOffset();
             CalculateParallelogramArea();
@@ -121,7 +121,11 @@ namespace TangramProject.Classes.Pieces
 
             rotation += rotationAmount;
             if (rotation == 360)
+            {
                 SetOrResetParallelogram();
+                rotation = 0;
+            }
+
 
             bitmap.RefreshFrame();
             try

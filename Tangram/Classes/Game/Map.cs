@@ -16,7 +16,9 @@ namespace Tangram.Classes.Game
         public PointF C;
         public PointF D;
 
-        double sideA;
+        public PointF[] corners;
+
+        public double sideA;
 
         public Bitmap bitmap;
 
@@ -32,6 +34,10 @@ namespace Tangram.Classes.Game
             C = new PointF((float)sideA, (float)sideA);
             D = new PointF(0, (float)sideA);
 
+            corners = new PointF[]
+            {
+                A, B, C, D
+            };
             InitializeBitmap();
         }
 

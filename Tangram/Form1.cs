@@ -104,6 +104,12 @@ namespace TangramProject
                         game.setOfTans[grabbedPiece].Rotate();
                         canvas.Invalidate();
                         break;
+                    case 'f':
+                        if (game.winChecker.CheckForWinCondition())
+                            label1.Text = "SUCCESS";
+                        else
+                            label1.Text = "Checking...";
+                        break;
                     default:
                         break;
                 }

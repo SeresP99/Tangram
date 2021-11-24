@@ -136,7 +136,11 @@ namespace TangramProject.Classes.Pieces
 
             rotation += rotationAmount;
             if (rotation == 360)
+            {
                 ResetTriangle();
+                rotation = 0;
+            }
+                
 
             bitmap.RefreshFrame();
             try
