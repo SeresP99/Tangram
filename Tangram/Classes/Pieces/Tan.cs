@@ -27,7 +27,7 @@ namespace TangramProject.Classes.Pieces
         public double altitude;
         public double area;
 
-        public double offset;
+        public float offsetWithinBitmap;
 
         public double scale;
         public Color color;

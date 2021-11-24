@@ -10,6 +10,8 @@ namespace TangramProject.Classes.Pieces
 {
     class TanParallelogram : Tan
     {
+        double offset;
+
         public TanParallelogram(Color color, float X, float Y, double scale)
         {
             this.scale = scale;
@@ -34,6 +36,7 @@ namespace TangramProject.Classes.Pieces
             C = new PointF((float)sideA, (float)altitude);
             D = new PointF((float)(offset + sideA), 0);
 
+            GetCenter();
             OffsetParallelogramForRotation();
         }
 

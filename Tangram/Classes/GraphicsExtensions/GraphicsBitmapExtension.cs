@@ -90,7 +90,8 @@ namespace TangramProject.Classes.GraphicsExtensions
             {
                 for (int j = 0; j < bitmap.Height; j++)
                 {
-                    bitmap.SetPixel(i, j, Color.FromArgb(0, 0, 0, 0));
+                    //bitmap.SetPixel(i, j, Color.FromArgb(0, 0, 0, 0));
+                    bitmap.SetPixel(i, j, Color.Black);
                 }
             }
         }

@@ -43,57 +43,77 @@ namespace TangramProject.Classes.Pieces
 
             CalculateAltitude();
             CalculateArea();
-            SetOrResetTriangle();
+            InitializeTriangle();
             GetCenter();
+            OffsetTriangleForRotation();
             InitializeBitmap();
         }
 
-        private void SetOrResetTriangle()
+        private void InitializeTriangle()
         {
             A = new PointF(0, 0);
             B = new PointF((int)sideA, 0);
             C = new PointF((int)(sideA / 2), (int)altitude);
 
+            GetCenter();
+        }
+
+        private void ResetTriangle()
+        {
+            InitializeTriangle();
             OffsetTriangleForRotation();
         }
 
         public void OffsetTriangleForRotation()
         {
-            switch (type)
-            {
-                case TanTriangleSize.LARGE: //DONE'D
-                    A.Y += 120;
-                    B.Y += 120;
-                    C.Y += 120;
-                    A.X += 10;
-                    B.X += 10;
-                    C.X += 10;
-                    break;
-                case TanTriangleSize.MEDIUM:
-                    A.Y += 55;
-                    B.Y += 55;
-                    C.Y += 55;
-                    A.X += 10;
-                    B.X += 10;
-                    C.X += 10;
-                    break;
-                case TanTriangleSize.SMALL:
-                    A.Y += 40;
-                    B.Y += 40;
-                    C.Y += 40;
-                    A.X += 10;
-                    B.X += 10;
-                    C.X += 10;
-                    break;
-                default:
-                    break;
-            }
+            offsetWithinBitmap = ((float)sideA / 2 - center.Y);
+            A.Y += offsetWithinBitmap + 50;
+            B.Y += offsetWithinBitmap + 50;
+            C.Y += offsetWithinBitmap + 50;
 
+            A.X += 50;
+            B.X += 50;
+            C.X += 50;
+
+            //NEEDS TO BE REFRESHED BECAUSE TRIANGLE HAS BEEN MOVED (FOR ROTATION SPACE)
+            GetCenter();
+
+            #region Old Switch Used for Offset, should delete if successful
+            /*switch (type)
+                {
+                    case TanTriangleSize.LARGE: //DONE'D
+                        A.Y += 120;
+                        B.Y += 120;
+                        C.Y += 120;
+                        A.X += 10;
+                        B.X += 10;
+                        C.X += 10;
+                        break;
+                    case TanTriangleSize.MEDIUM:
+                        A.Y += 55;
+                        B.Y += 55;
+                        C.Y += 55;
+                        A.X += 10;
+                        B.X += 10;
+                        C.X += 10;
+                        break;
+                    case TanTriangleSize.SMALL:
+                        A.Y += 40;
+                        B.Y += 40;
+                        C.Y += 40;
+                        A.X += 10;
+                        B.X += 10;
+                        C.X += 10;
+                        break;
+                    default:
+                        break;
+            }*/
+            #endregion
         }
 
         private void InitializeBitmap()
         {
-            bitmap = new Bitmap((int)sideA + 20, (int)sideA + 20);
+            bitmap = new Bitmap((int)sideA + (int)offsetWithinBitmap, (int)sideA + (int)offsetWithinBitmap);
             bitmap.RefreshFrame();
             bitmap.DrawTan(this);
         }
@@ -154,10 +174,10 @@ namespace TangramProject.Classes.Pieces
 
             rotation += rotationAmount;
             if (rotation == 360)
-                SetOrResetTriangle();
+                ResetTriangle();
 
             bitmap.RefreshFrame();
-                bitmap.DrawTan(this);
+            bitmap.DrawTan(this);
             /*catch (Exception e)
             {
                 MessageBox.Show(e.Message + " \nFailure at shape: " + this.GetType().Name + "\n");
@@ -165,16 +185,16 @@ namespace TangramProject.Classes.Pieces
         }
 
         //DONE
-        
-
-        //DONE
         private void GetCenter()
         {
-            center = new PointF(A.X + (float)sideA / 2, A.Y + (float)altitude / 2);
+            //https://brilliant.org/wiki/triangles-centroid/
+            this.center = new PointF((A.X + B.X + C.X) / 3, (A.Y + B.Y + C.Y) / 3);
+
+            //center = new PointF(A.X + (float)sideA / 2, A.Y + (float)altitude / 2);
         }
 
-        
-        
+
+
 
     }
 }
