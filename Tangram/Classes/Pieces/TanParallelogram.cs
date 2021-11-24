@@ -21,12 +21,13 @@ namespace TangramProject.Classes.Pieces
             sideA = Math.Sqrt(2) * scale;
             sideB = 1 * scale;
 
+            
             CalculateParallelogramAltitude();
             CalculateParallelogramOffset();
             CalculateParallelogramArea();
             SetOrResetParallelogram();
-            GetCenter();
             InitializeBitmap();
+            GetCenter();
         }
 
         private void SetOrResetParallelogram()
@@ -42,25 +43,25 @@ namespace TangramProject.Classes.Pieces
 
         private void OffsetParallelogramForRotation()
         {
-            A.Y += 70;
-            B.Y += 70;
-            C.Y += 70;
-            D.Y += 70;
-            A.X += 10;
-            B.X += 10;
-            C.X += 10;
-            D.X += 10;
+            offsetWithinBitmap = (float)(offset + sideA) / 2 - center.Y;
+            A.Y += offsetWithinBitmap;
+            B.Y += offsetWithinBitmap;
+            C.Y += offsetWithinBitmap;
+            D.Y += offsetWithinBitmap;
+
+            GetCenter();
         }
 
         private void InitializeBitmap()
         {
-            bitmap = new Bitmap((int)(sideA + offset) + 70, (int)(sideA + offset) + 70);
+            bitmap = new Bitmap((int)(sideA + offset) + 1, (int)(sideA + offset) + 1);
             bitmap.DrawTan(this);
         }
 
         private void GetCenter()
         {
-            center = new PointF(B.X + (float)(sideA + offset) / 2, B.Y - (float)(altitude / 2));
+            //center = new PointF(B.X + (float)(sideA + offset) / 2, B.Y - (float)(altitude / 2));
+            center = new PointF((A.X + B.X + C.X + D.X) / 4, (A.Y + B.Y + C.Y + D.Y) / 4);
         }
 
         public double CalculateParallelogramAltitude()
@@ -73,10 +74,6 @@ namespace TangramProject.Classes.Pieces
         {
 
             offset = sideB * sideB - altitude * altitude;
-            if (offset < 0)
-            {
-                offset *= -1;
-            }
             offset = Math.Sqrt(offset);
             return offset;
         }

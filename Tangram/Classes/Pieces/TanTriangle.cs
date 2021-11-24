@@ -44,7 +44,6 @@ namespace TangramProject.Classes.Pieces
             CalculateAltitude();
             CalculateArea();
             InitializeTriangle();
-            GetCenter();
             OffsetTriangleForRotation();
             InitializeBitmap();
         }
@@ -71,45 +70,12 @@ namespace TangramProject.Classes.Pieces
             B.Y += offsetWithinBitmap;
             C.Y += offsetWithinBitmap;
 
-            //NEEDS TO BE REFRESHED BECAUSE TRIANGLE HAS BEEN MOVED (FOR ROTATION SPACE)
             GetCenter();
-
-            #region Old Switch Used for Offset, should delete if successful
-            /*switch (type)
-                {
-                    case TanTriangleSize.LARGE: //DONE'D
-                        A.Y += 120;
-                        B.Y += 120;
-                        C.Y += 120;
-                        A.X += 10;
-                        B.X += 10;
-                        C.X += 10;
-                        break;
-                    case TanTriangleSize.MEDIUM:
-                        A.Y += 55;
-                        B.Y += 55;
-                        C.Y += 55;
-                        A.X += 10;
-                        B.X += 10;
-                        C.X += 10;
-                        break;
-                    case TanTriangleSize.SMALL:
-                        A.Y += 40;
-                        B.Y += 40;
-                        C.Y += 40;
-                        A.X += 10;
-                        B.X += 10;
-                        C.X += 10;
-                        break;
-                    default:
-                        break;
-            }*/
-            #endregion
         }
 
         private void InitializeBitmap()
         {
-            bitmap = new Bitmap((int)sideA + 1, (int)sideA + 1);
+            bitmap = new Bitmap((int)sideA + 2, (int)sideA + 2);
             bitmap.RefreshFrame();
             bitmap.DrawTan(this);
         }
@@ -173,11 +139,14 @@ namespace TangramProject.Classes.Pieces
                 ResetTriangle();
 
             bitmap.RefreshFrame();
-            bitmap.DrawTan(this);
-            /*catch (Exception e)
+            try
+            {
+                bitmap.DrawTan(this);
+            }
+            catch (Exception e)
             {
                 MessageBox.Show(e.Message + " \nFailure at shape: " + this.GetType().Name + "\n");
-            }*/
+            }
         }
 
         //DONE
@@ -185,8 +154,6 @@ namespace TangramProject.Classes.Pieces
         {
             //https://brilliant.org/wiki/triangles-centroid/
             this.center = new PointF((A.X + B.X + C.X) / 3, (A.Y + B.Y + C.Y) / 3);
-
-            //center = new PointF(A.X + (float)sideA / 2, A.Y + (float)altitude / 2);
         }
 
 

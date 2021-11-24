@@ -19,32 +19,42 @@ namespace TangramProject.Classes.Pieces
             sideA = 1 * scale;
 
             CalculateSquareArea();
-            SetOrResetSquare();
-            GetCenter();
+            SetSquare();
+            OffsetSquareForRotation();
             InitializeBitmap();
         }
 
-        private void SetOrResetSquare()
+        private void SetSquare()
         {
             A = new PointF(0, 0);
             B = new PointF(0, (float)sideA);
             C = new PointF((float)sideA, (float)sideA);
             D = new PointF((float)sideA, 0);
 
-            OffsetSquareForRotation();
+            GetCenter();
         }
 
         private void OffsetSquareForRotation()
         {
-            A.Y += 20;
-            B.Y += 20;
-            C.Y += 20;
-            D.Y += 20;
+            offsetWithinBitmap = (float)(sideA * Math.Sqrt(2) / 2 - center.Y);
 
-            A.X += 20;
-            B.X += 20;
-            C.X += 20;
-            D.X += 20;
+            A.Y += offsetWithinBitmap;
+            B.Y += offsetWithinBitmap;
+            C.Y += offsetWithinBitmap;
+            D.Y += offsetWithinBitmap;
+
+            A.X += offsetWithinBitmap;
+            B.X += offsetWithinBitmap;
+            C.X += offsetWithinBitmap;
+            D.X += offsetWithinBitmap;
+
+            GetCenter();
+        }
+
+        private void ResetSquare()
+        {
+            SetSquare();
+            OffsetSquareForRotation();
         }
 
         private void CalculateSquareArea()
@@ -54,12 +64,12 @@ namespace TangramProject.Classes.Pieces
 
         private void GetCenter()
         {
-            center = new PointF(A.X + (float)sideA / 2, A.Y + (float)sideA / 2);
+            center = new PointF((A.X + B.X + C.X + D.X) / 4, (A.Y + B.Y + C.Y + D.Y) / 4);
         }
 
         private void InitializeBitmap()
         {
-            bitmap = new Bitmap((int)sideA + 41, (int)sideA + 41);
+            bitmap = new Bitmap((int)(sideA * Math.Sqrt(2)) + 2, (int)(sideA * Math.Sqrt(2)) + 2);
             bitmap.DrawTan(this);
         }
 
@@ -104,7 +114,7 @@ namespace TangramProject.Classes.Pieces
 
             rotation += rotationAmount;
             if (rotation == 360)
-                SetOrResetSquare();
+                ResetSquare();
 
             bitmap.RefreshFrame();
             try
@@ -116,6 +126,5 @@ namespace TangramProject.Classes.Pieces
                 MessageBox.Show(e.Message + " \nFailure at shape: " + this.GetType().Name);
             }
         }
-
     }
 }

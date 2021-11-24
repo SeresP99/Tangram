@@ -30,7 +30,7 @@ namespace TangramProject.Classes.Game
         public Tangram(double scale)
         {
             this.scale = scale;
-            map = new Map(215, 25, 25);
+            map = new Map(scale, 25, 25);
             largeTriangle1 = new TanTriangle(TanTriangleSize.LARGE, Color.Blue, 50, 50, scale);
             largeTriangle2 = new TanTriangle(TanTriangleSize.LARGE, Color.Orange, 50, 50, scale);
             mediumTriangle = new TanTriangle(TanTriangleSize.MEDIUM, Color.Gray, 50, 200, scale);

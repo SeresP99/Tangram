@@ -21,22 +21,26 @@ namespace TangramProject
         bool gotcha = false;
         float dx, dy;
         int grabbedPiece;
-        //written and tested with:   scale = 215
-        double scale = 215;
 
-        TanTriangle triangle;
+        double scale = 200;
+
+        Classes.Game.Tangram game;
 
         public Tangram()
         {
             InitializeComponent();
-            triangle = new TanTriangle(TanTriangleSize.LARGE, Color.Red, 100, 100, 10);
+            game = new Classes.Game.Tangram(scale);
         }
 
 
         private void canvas_Paint(object sender, PaintEventArgs e)
         {
             g = e.Graphics;
-            g.DrawImage(triangle.bitmap, triangle.X, triangle.Y);
+            g.DrawImage(game.map.bitmap, game.map.X, game.map.Y);
+            for (int i = 0; i < game.setOfTans.Length; i++)
+            {
+                g.DrawImage(game.setOfTans[i].bitmap, game.setOfTans[i].X, game.setOfTans[i].Y);
+            }
         }
 
         private void canvas_MouseDown(object sender, MouseEventArgs e)
@@ -44,16 +48,21 @@ namespace TangramProject
             switch (e.Button)
             {
                 case MouseButtons.Left:
-                    if (triangle.IsPointInArea(e.Location))
+                    for (int i = 0; i < game.setOfTans.Length; i++)
                     {
-                        gotcha = true;
-                        dx = e.X - triangle.X;
-                        dy = e.Y - triangle.Y;
+                        if (game.setOfTans[i].IsPointInArea(e.Location))
+                        {
+                            gotcha = true;
+                            grabbedPiece = i;
+                            dx = e.X - game.setOfTans[i].X;
+                            dy = e.Y - game.setOfTans[i].Y;
+                        }
                     }
                     break;
                 case MouseButtons.Right:
                     break;
                 case MouseButtons.Middle:
+                    int k = 7;
                     break;
                 default:
                     break;
@@ -80,7 +89,7 @@ namespace TangramProject
         {
             if (gotcha)
             {
-                triangle.Move(e.Location, dx, dy);
+                game.setOfTans[grabbedPiece].Move(e.Location, dx, dy);
                 canvas.Invalidate();
             }
         }
@@ -92,7 +101,7 @@ namespace TangramProject
                 switch (e.KeyChar)
                 {
                     case 'r':
-                        triangle.Rotate();
+                        game.setOfTans[grabbedPiece].Rotate();
                         canvas.Invalidate();
                         break;
                     default:

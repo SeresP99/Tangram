@@ -8,8 +8,8 @@ namespace Tangram.Classes.Game
 {
     class Map
     {
-        public double X;
-        public double Y;
+        public int X;
+        public int Y;
 
         public PointF A;
         public PointF B;
@@ -20,7 +20,7 @@ namespace Tangram.Classes.Game
 
         public Bitmap bitmap;
 
-        public Map(double scale, double X, double Y)
+        public Map(double scale, int X, int Y)
         {
             this.X = X;
             this.Y = Y;
@@ -37,7 +37,7 @@ namespace Tangram.Classes.Game
 
         public void InitializeBitmap()
         {
-            bitmap = new Bitmap((int)sideA + 10, (int)sideA + 10);
+            bitmap = new Bitmap((int)sideA + 2, (int)sideA + 2);
             bitmap.DrawMap(this);
         }
 
