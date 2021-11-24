@@ -67,13 +67,9 @@ namespace TangramProject.Classes.Pieces
         public void OffsetTriangleForRotation()
         {
             offsetWithinBitmap = ((float)sideA / 2 - center.Y);
-            A.Y += offsetWithinBitmap + 50;
-            B.Y += offsetWithinBitmap + 50;
-            C.Y += offsetWithinBitmap + 50;
-
-            A.X += 50;
-            B.X += 50;
-            C.X += 50;
+            A.Y += offsetWithinBitmap;
+            B.Y += offsetWithinBitmap;
+            C.Y += offsetWithinBitmap;
 
             //NEEDS TO BE REFRESHED BECAUSE TRIANGLE HAS BEEN MOVED (FOR ROTATION SPACE)
             GetCenter();
@@ -113,7 +109,7 @@ namespace TangramProject.Classes.Pieces
 
         private void InitializeBitmap()
         {
-            bitmap = new Bitmap((int)sideA + (int)offsetWithinBitmap, (int)sideA + (int)offsetWithinBitmap);
+            bitmap = new Bitmap((int)sideA + 1, (int)sideA + 1);
             bitmap.RefreshFrame();
             bitmap.DrawTan(this);
         }

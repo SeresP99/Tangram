@@ -29,7 +29,7 @@ namespace TangramProject
         public Tangram()
         {
             InitializeComponent();
-            triangle = new TanTriangle(TanTriangleSize.LARGE, Color.Red, 100, 100, 141);
+            triangle = new TanTriangle(TanTriangleSize.LARGE, Color.Red, 100, 100, 10);
         }
 
 
