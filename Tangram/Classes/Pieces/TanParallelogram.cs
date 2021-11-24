@@ -4,26 +4,30 @@ using System.Text;
 using System.Drawing;
 using TangramProject.Classes.GraphicsExtensions;
 using Tangram.Classes.PointExtensions;
+using System.Windows.Forms;
 
 namespace TangramProject.Classes.Pieces
 {
     class TanParallelogram : Tan
     {
-        public TanParallelogram(Color color, float X, float Y)
+        double offset;
+
+        public TanParallelogram(Color color, float X, float Y, double scale)
         {
-            scale = 98;
+            this.scale = scale;
             this.X = X;
             this.Y = Y;
             this.color = color;
             sideA = Math.Sqrt(2) * scale;
             sideB = 1 * scale;
 
+
             CalculateParallelogramAltitude();
             CalculateParallelogramOffset();
             CalculateParallelogramArea();
             SetOrResetParallelogram();
-            GetCenter();
             InitializeBitmap();
+            GetCenter();
         }
 
         private void SetOrResetParallelogram()
@@ -33,30 +37,31 @@ namespace TangramProject.Classes.Pieces
             C = new PointF((float)sideA, (float)altitude);
             D = new PointF((float)(offset + sideA), 0);
 
+            GetCenter();
             OffsetParallelogramForRotation();
         }
 
         private void OffsetParallelogramForRotation()
         {
-            A.Y += 70;
-            B.Y += 70;
-            C.Y += 70;
-            D.Y += 70;
-            A.X += 10;
-            B.X += 10;
-            C.X += 10;
-            D.X += 10;
+            offsetWithinBitmap = (float)(offset + sideA) / 2 - center.Y;
+            A.Y += offsetWithinBitmap;
+            B.Y += offsetWithinBitmap;
+            C.Y += offsetWithinBitmap;
+            D.Y += offsetWithinBitmap;
+
+            GetCenter();
         }
 
         private void InitializeBitmap()
         {
-            bitmap = new Bitmap((int)(sideA + offset) + 70, (int)(sideA + offset) + 70);
+            bitmap = new Bitmap((int)(sideA + offset) + 1, (int)(sideA + offset) + 1);
             bitmap.DrawTan(this);
         }
 
         private void GetCenter()
         {
-            center = new PointF(B.X + (float)(sideA + offset) / 2, B.Y - (float)(altitude / 2));
+            //center = new PointF(B.X + (float)(sideA + offset) / 2, B.Y - (float)(altitude / 2));
+            center = new PointF((A.X + B.X + C.X + D.X) / 4, (A.Y + B.Y + C.Y + D.Y) / 4);
         }
 
         public double CalculateParallelogramAltitude()
@@ -69,10 +74,6 @@ namespace TangramProject.Classes.Pieces
         {
 
             offset = sideB * sideB - altitude * altitude;
-            if (offset < 0)
-            {
-                offset *= -1;
-            }
             offset = Math.Sqrt(offset);
             return offset;
         }
@@ -120,10 +121,21 @@ namespace TangramProject.Classes.Pieces
 
             rotation += rotationAmount;
             if (rotation == 360)
+            {
                 SetOrResetParallelogram();
+                rotation = 0;
+            }
+
 
             bitmap.RefreshFrame();
-            bitmap.DrawTan(this);
+            try
+            {
+                bitmap.DrawTan(this);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + " \nFailure at shape: " + this.GetType().Name);
+            }
         }
     }
 }

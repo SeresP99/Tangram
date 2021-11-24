@@ -26,5 +26,21 @@ namespace Tangram.Classes.PointExtensions
                 cosTheta * (pointToRotate.Y - center.Y) + center.Y)
             };
         }
+
+        public static bool IsCloseEnoughTo(this Point thisPoint, Point thatPoint, int tolerance = 2)
+        {
+            int xDiff = thisPoint.X - thatPoint.X;
+            int yDiff = thisPoint.Y - thatPoint.Y;
+
+            return xDiff < tolerance && yDiff < tolerance;
+        }
+
+        public static bool IsCloseEnoughTo(this PointF thisPoint, PointF thatPoint, int tolerance = 2)
+        {
+            double xDiff = thisPoint.X - thatPoint.X;
+            double yDiff = thisPoint.Y - thatPoint.Y;
+
+            return Math.Abs(xDiff) < tolerance && Math.Abs(yDiff) < tolerance;
+        }
     }
 }

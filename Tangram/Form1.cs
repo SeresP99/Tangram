@@ -17,23 +17,26 @@ namespace TangramProject
     public partial class Tangram : Form
     {
         Graphics g;
-        Classes.Game.Tangram game;
 
         bool gotcha = false;
         float dx, dy;
         int grabbedPiece;
 
+        double scale = 200;
+
+        Classes.Game.Tangram game;
 
         public Tangram()
         {
             InitializeComponent();
-            game = new Classes.Game.Tangram(100);
+            game = new Classes.Game.Tangram(scale);
         }
 
 
         private void canvas_Paint(object sender, PaintEventArgs e)
         {
             g = e.Graphics;
+            g.DrawImage(game.map.bitmap, game.map.X, game.map.Y);
             for (int i = 0; i < game.setOfTans.Length; i++)
             {
                 g.DrawImage(game.setOfTans[i].bitmap, game.setOfTans[i].X, game.setOfTans[i].Y);
@@ -59,6 +62,7 @@ namespace TangramProject
                 case MouseButtons.Right:
                     break;
                 case MouseButtons.Middle:
+                    int k = 7;
                     break;
                 default:
                     break;
@@ -99,6 +103,12 @@ namespace TangramProject
                     case 'r':
                         game.setOfTans[grabbedPiece].Rotate();
                         canvas.Invalidate();
+                        break;
+                    case 'f':
+                        if (game.winChecker.CheckForWinCondition())
+                            label1.Text = "SUCCESS";
+                        else
+                            label1.Text = "Checking...";
                         break;
                     default:
                         break;

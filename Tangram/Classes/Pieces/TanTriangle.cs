@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
+using System.Windows.Forms;
 using Tangram.Classes.PointExtensions;
 using TangramProject.Classes.GraphicsExtensions;
 
@@ -14,9 +15,9 @@ namespace TangramProject.Classes.Pieces
 
         //2√2 ≈ 2.8
 
-        public TanTriangle(TanTriangleSize type, Color color, float X, float Y)
+        public TanTriangle(TanTriangleSize type, Color color, float X, float Y, double scale)
         {
-            scale = 98;
+            this.scale = scale;
             this.type = type;
             this.color = color;
             this.X = X;
@@ -42,57 +43,39 @@ namespace TangramProject.Classes.Pieces
 
             CalculateAltitude();
             CalculateArea();
-            SetOrResetTriangle();
-            GetCenter();
+            InitializeTriangle();
+            OffsetTriangleForRotation();
             InitializeBitmap();
         }
 
-        private void SetOrResetTriangle()
+        private void InitializeTriangle()
         {
             A = new PointF(0, 0);
             B = new PointF((int)sideA, 0);
             C = new PointF((int)(sideA / 2), (int)altitude);
 
+            GetCenter();
+        }
+
+        private void ResetTriangle()
+        {
+            InitializeTriangle();
             OffsetTriangleForRotation();
         }
 
         public void OffsetTriangleForRotation()
         {
-            switch (type)
-            {
-                case TanTriangleSize.LARGE: //DONE'D
-                    A.Y += 80;
-                    B.Y += 80;
-                    C.Y += 80;
-                    A.X += 10;
-                    B.X += 10;
-                    C.X += 10;
-                    break;
-                case TanTriangleSize.MEDIUM:
-                    A.Y += 55;
-                    B.Y += 55;
-                    C.Y += 55;
-                    A.X += 10;
-                    B.X += 10;
-                    C.X += 10;
-                    break;
-                case TanTriangleSize.SMALL:
-                    A.Y += 40;
-                    B.Y += 40;
-                    C.Y += 40;
-                    A.X += 10;
-                    B.X += 10;
-                    C.X += 10;
-                    break;
-                default:
-                    break;
-            }
+            offsetWithinBitmap = ((float)sideA / 2 - center.Y);
+            A.Y += offsetWithinBitmap;
+            B.Y += offsetWithinBitmap;
+            C.Y += offsetWithinBitmap;
 
+            GetCenter();
         }
 
         private void InitializeBitmap()
         {
-            bitmap = new Bitmap((int)sideA + 20, (int)sideA + 20);
+            bitmap = new Bitmap((int)sideA + 2, (int)sideA + 2);
             bitmap.RefreshFrame();
             bitmap.DrawTan(this);
         }
@@ -153,23 +136,32 @@ namespace TangramProject.Classes.Pieces
 
             rotation += rotationAmount;
             if (rotation == 360)
-                SetOrResetTriangle();
+            {
+                ResetTriangle();
+                rotation = 0;
+            }
+                
 
             bitmap.RefreshFrame();
-            bitmap.DrawTan(this);
+            try
+            {
+                bitmap.DrawTan(this);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + " \nFailure at shape: " + this.GetType().Name + "\n");
+            }
         }
-
-        //DONE
-        
 
         //DONE
         private void GetCenter()
         {
-            center = new PointF(A.X + (float)sideA / 2, A.Y + (float)altitude / 2);
+            //https://brilliant.org/wiki/triangles-centroid/
+            this.center = new PointF((A.X + B.X + C.X) / 3, (A.Y + B.Y + C.Y) / 3);
         }
 
-        
-        
+
+
 
     }
 }
