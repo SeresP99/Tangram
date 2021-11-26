@@ -54,7 +54,7 @@ namespace TangramProject.Classes.Pieces
 
         private void InitializeBitmap()
         {
-            bitmap = new Bitmap((int)(sideA + offset) + 1, (int)(sideA + offset) + 1);
+            bitmap = new Bitmap((int)(sideA + offset) + 2, (int)(sideA + offset) + 2);
             bitmap.DrawTan(this);
         }
 

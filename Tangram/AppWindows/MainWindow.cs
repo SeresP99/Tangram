@@ -11,6 +11,7 @@ using TangramProject.Classes.Pieces;
 using TangramProject.Classes.GraphicsExtensions;
 using TangramProject.Classes.Game;
 using System.Threading;
+using Tangram.AppWindows;
 
 namespace TangramProject
 {
@@ -22,13 +23,22 @@ namespace TangramProject
         float dx, dy;
         int grabbedPiece;
 
-        double scale = 800;
+        double scale = 100;
 
         Classes.Game.Tangram game;
 
         public Tangram()
         {
+            SizeSettingWindow settingWindow = new SizeSettingWindow(scale);
+            settingWindow.ShowDialog();
+            scale = settingWindow.scale;
+            
             InitializeComponent();
+            Width = (int)(scale * (Width / 100));
+            Height = (int)(scale * (Height / 100));
+            Size = new Size(Width, Height);
+            canvas.Width = Width;
+            canvas.Height = Height;
             game = new Classes.Game.Tangram(scale);
         }
 
@@ -62,7 +72,6 @@ namespace TangramProject
                 case MouseButtons.Right:
                     break;
                 case MouseButtons.Middle:
-                    int k = 7;
                     break;
                 default:
                     break;
