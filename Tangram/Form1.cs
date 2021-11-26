@@ -22,7 +22,7 @@ namespace TangramProject
         float dx, dy;
         int grabbedPiece;
 
-        double scale = 200;
+        double scale = 800;
 
         Classes.Game.Tangram game;
 
@@ -75,6 +75,10 @@ namespace TangramProject
             {
                 case MouseButtons.Left:
                     gotcha = false;
+                    if (game.winChecker.CheckForWinCondition())
+                        label1.Text = "SUCCESS";
+                    else
+                        label1.Text = "Checking...";
                     break;
                 case MouseButtons.None:
                     break;
@@ -105,10 +109,6 @@ namespace TangramProject
                         canvas.Invalidate();
                         break;
                     case 'f':
-                        if (game.winChecker.CheckForWinCondition())
-                            label1.Text = "SUCCESS";
-                        else
-                            label1.Text = "Checking...";
                         break;
                     default:
                         break;

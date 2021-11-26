@@ -35,7 +35,7 @@ namespace Tangram.Classes.PointExtensions
             return xDiff < tolerance && yDiff < tolerance;
         }
 
-        public static bool IsCloseEnoughTo(this PointF thisPoint, PointF thatPoint, int tolerance = 2)
+        public static bool IsCloseEnoughTo(this PointF thisPoint, PointF thatPoint, int tolerance = 5)
         {
             double xDiff = thisPoint.X - thatPoint.X;
             double yDiff = thisPoint.Y - thatPoint.Y;

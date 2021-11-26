@@ -15,13 +15,13 @@ namespace TangramProject.Classes.Game
     {
         public Map map;
 
-        Tan largeTriangle1;
-        Tan largeTriangle2;
-        Tan mediumTriangle;
-        Tan smallTriangle1;
-        Tan smallTriangle2;
-        Tan square;
-        Tan parallelogram;
+        public Tan largeTriangle1;
+        public Tan largeTriangle2;
+        public Tan mediumTriangle;
+        public Tan smallTriangle1;
+        public Tan smallTriangle2;
+        public Tan square;
+        public Tan parallelogram;
 
         public readonly double scale;
 
