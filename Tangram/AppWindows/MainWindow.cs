@@ -34,6 +34,7 @@ namespace TangramProject
             settingWindow.ShowDialog();
             InitializeComponent();
 
+            tutorial_label.BackColor = Color.Transparent;
             scale = settingWindow.scale;
             setSize();
             game = new Classes.Game.Tangram(scale);
