@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace TangramProject.Classes.Pieces
 {
@@ -33,8 +34,27 @@ namespace TangramProject.Classes.Pieces
         public Color color;
 
         public abstract bool IsPointInArea(Point p);
-        public abstract void Move(Point cursorLocation, float dx, float dy);
+
+        public void Move(PictureBox canvas, Point cursorLocation, float dx, float dy)
+        {
+            X = cursorLocation.X - dx;
+            Y = cursorLocation.Y - dy;
+
+            if (X < -bitmap.Width / 3) X = -bitmap.Width / 3 ;
+            else if (X > canvas.Width - bitmap.Width * 0.75f) X = canvas.Width - bitmap.Width * 0.75f;
+
+            if (Y < -bitmap.Height / 3) Y = -bitmap.Height / 3;
+            else if (Y > canvas.Height - bitmap.Height * 0.75f) Y = canvas.Height - bitmap.Height * 0.75f;
+        }
+
         public abstract void Rotate();
+        public void Rotate180()
+        {
+            Rotate();
+            Rotate();
+            Rotate();
+            Rotate();
+        }
         public PointF GetAbsolutePoint(char pointLetter)
         {
             switch (pointLetter)

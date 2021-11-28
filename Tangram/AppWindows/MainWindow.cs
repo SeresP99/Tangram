@@ -11,6 +11,7 @@ using TangramProject.Classes.Pieces;
 using TangramProject.Classes.GraphicsExtensions;
 using TangramProject.Classes.Game;
 using System.Threading;
+using Tangram.AppWindows;
 
 namespace TangramProject
 {
@@ -22,14 +23,22 @@ namespace TangramProject
         float dx, dy;
         int grabbedPiece;
 
-        double scale = 800;
+        double scale = 100;
 
         Classes.Game.Tangram game;
+        DateTime currTime;
 
         public Tangram()
         {
+            SizeSettingWindow settingWindow = new SizeSettingWindow(scale, this);
+            settingWindow.ShowDialog();
             InitializeComponent();
+
+            tutorial_label.BackColor = Color.Transparent;
+            scale = settingWindow.scale;
+            setSize();
             game = new Classes.Game.Tangram(scale);
+            game.timeIntoGame.Start();
         }
 
 
@@ -62,7 +71,6 @@ namespace TangramProject
                 case MouseButtons.Right:
                     break;
                 case MouseButtons.Middle:
-                    int k = 7;
                     break;
                 default:
                     break;
@@ -76,9 +84,18 @@ namespace TangramProject
                 case MouseButtons.Left:
                     gotcha = false;
                     if (game.winChecker.CheckForWinCondition())
-                        label1.Text = "SUCCESS";
-                    else
-                        label1.Text = "Checking...";
+                    {
+                        currTime = new DateTime();
+                        currTime = currTime.AddMilliseconds(game.timeIntoGame.ElapsedMilliseconds);
+                        MessageBox.Show("You have succeeded!" + "\n" + "Time you took: " +
+                            currTime.Hour + ":"
+                            + currTime.Minute + ":"
+                            + currTime.Second + ":"
+                            + currTime.Millisecond 
+                            +"\n"
+                            +"Thank you for playing!");
+                        Close();
+                    }
                     break;
                 case MouseButtons.None:
                     break;
@@ -93,7 +110,7 @@ namespace TangramProject
         {
             if (gotcha)
             {
-                game.setOfTans[grabbedPiece].Move(e.Location, dx, dy);
+                game.setOfTans[grabbedPiece].Move(canvas, e.Location, dx, dy);
                 canvas.Invalidate();
             }
         }
@@ -116,10 +133,19 @@ namespace TangramProject
             }
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void setSize()
         {
+            Width = (int)(scale * (Width / 100));
+            Height = (int)(scale * (Height / 100));
+            Size = new Size(Width, Height);
+            canvas.Width = Width;
+            canvas.Height = Height;
 
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
         }
+
     }
 }
 

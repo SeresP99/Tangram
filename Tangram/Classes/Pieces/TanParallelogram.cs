@@ -54,7 +54,7 @@ namespace TangramProject.Classes.Pieces
 
         private void InitializeBitmap()
         {
-            bitmap = new Bitmap((int)(sideA + offset) + 1, (int)(sideA + offset) + 1);
+            bitmap = new Bitmap((int)(sideA + offset) + 2, (int)(sideA + offset) + 2);
             bitmap.DrawTan(this);
         }
 
@@ -105,11 +105,6 @@ namespace TangramProject.Classes.Pieces
             return (float)Math.Abs((p1.X * (p2.Y - p3.Y) + p2.X * (p3.Y - p1.Y) + p3.X * (p1.Y - p2.Y)) / 2.0);
         }
 
-        public override void Move(Point cursorLocation, float dx, float dy)
-        {
-            this.X = cursorLocation.X - dx;
-            this.Y = cursorLocation.Y - dy;
-        }
 
         public override void Rotate()
         {

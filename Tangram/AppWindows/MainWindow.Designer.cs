@@ -29,18 +29,19 @@ namespace TangramProject
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.canvas = new System.Windows.Forms.PictureBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
+            this.tutorial_label = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.SuspendLayout();
             // 
             // canvas
             // 
-            this.canvas.Location = new System.Drawing.Point(12, 12);
+            this.canvas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.canvas.Location = new System.Drawing.Point(0, 0);
             this.canvas.Name = "canvas";
-            this.canvas.Size = new System.Drawing.Size(1240, 657);
+            this.canvas.Size = new System.Drawing.Size(854, 480);
             this.canvas.TabIndex = 0;
             this.canvas.TabStop = false;
             this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
@@ -48,26 +49,23 @@ namespace TangramProject
             this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
             this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
             // 
-            // timer1
+            // tutorial_label
             // 
-            this.timer1.Interval = 10;
-            this.timer1.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1069, 639);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Checking...";
+            this.tutorial_label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.tutorial_label.AutoSize = true;
+            this.tutorial_label.Location = new System.Drawing.Point(546, 387);
+            this.tutorial_label.Name = "tutorial_label";
+            this.tutorial_label.Size = new System.Drawing.Size(280, 45);
+            this.tutorial_label.TabIndex = 1;
+            this.tutorial_label.Text = "Help:\r\nUse the left mouse button to grab and move pieces.\r\nPress [R] to rotate th" +
+    "e currently grabbed piece.";
             // 
             // Tangram
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1264, 681);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(838, 441);
+            this.Controls.Add(this.tutorial_label);
             this.Controls.Add(this.canvas);
             this.Name = "Tangram";
             this.Text = "Form1";
@@ -81,8 +79,7 @@ namespace TangramProject
         #endregion
 
         private System.Windows.Forms.PictureBox canvas;
-        private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label tutorial_label;
     }
 }
 
