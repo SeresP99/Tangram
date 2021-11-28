@@ -29,10 +29,8 @@ namespace TangramProject
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.canvas = new System.Windows.Forms.PictureBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
+            this.timer_label = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -43,7 +41,7 @@ namespace TangramProject
             | System.Windows.Forms.AnchorStyles.Right)));
             this.canvas.Location = new System.Drawing.Point(0, 0);
             this.canvas.Name = "canvas";
-            this.canvas.Size = new System.Drawing.Size(838, 441);
+            this.canvas.Size = new System.Drawing.Size(854, 480);
             this.canvas.TabIndex = 0;
             this.canvas.TabStop = false;
             this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
@@ -51,26 +49,20 @@ namespace TangramProject
             this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
             this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
             // 
-            // timer1
+            // timer_label
             // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(734, 408);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Checking...";
+            this.timer_label.AutoSize = true;
+            this.timer_label.Location = new System.Drawing.Point(21, 9);
+            this.timer_label.Name = "timer_label";
+            this.timer_label.Size = new System.Drawing.Size(0, 15);
+            this.timer_label.TabIndex = 1;
             // 
             // Tangram
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(838, 441);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.timer_label);
             this.Controls.Add(this.canvas);
             this.Name = "Tangram";
             this.Text = "Form1";
@@ -84,8 +76,7 @@ namespace TangramProject
         #endregion
 
         private System.Windows.Forms.PictureBox canvas;
-        private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label timer_label;
     }
 }
 

@@ -26,15 +26,18 @@ namespace TangramProject
         double scale = 100;
 
         Classes.Game.Tangram game;
+        DateTime currTime;
 
         public Tangram()
         {
             SizeSettingWindow settingWindow = new SizeSettingWindow(scale, this);
             settingWindow.ShowDialog();
-            scale = settingWindow.scale;
             InitializeComponent();
+
+            scale = settingWindow.scale;
             setSize();
             game = new Classes.Game.Tangram(scale);
+            game.timeIntoGame.Start();
         }
 
 
@@ -80,9 +83,18 @@ namespace TangramProject
                 case MouseButtons.Left:
                     gotcha = false;
                     if (game.winChecker.CheckForWinCondition())
-                        MessageBox.Show("You have succeeded!" + "\n" + "Time you took: " + timer1.ToString());
-                    else
-                        label1.Text = "Checking...";
+                    {
+                        currTime = new DateTime();
+                        currTime = currTime.AddMilliseconds(game.timeIntoGame.ElapsedMilliseconds);
+                        MessageBox.Show("You have succeeded!" + "\n" + "Time you took: " +
+                            currTime.Hour + ":"
+                            + currTime.Minute + ":"
+                            + currTime.Second + ":"
+                            + currTime.Millisecond 
+                            +"\n"
+                            +"Thank you for playing!");
+                        Close();
+                    }
                     break;
                 case MouseButtons.None:
                     break;
@@ -97,7 +109,7 @@ namespace TangramProject
         {
             if (gotcha)
             {
-                game.setOfTans[grabbedPiece].Move(e.Location, dx, dy);
+                game.setOfTans[grabbedPiece].Move(canvas, e.Location, dx, dy);
                 canvas.Invalidate();
             }
         }
@@ -120,11 +132,6 @@ namespace TangramProject
             }
         }
 
-        private void timer_Tick(object sender, EventArgs e)
-        {
-            game.timeIntoGame.AddSeconds(1);
-        }
-
         private void setSize()
         {
             Width = (int)(scale * (Width / 100));
@@ -132,6 +139,10 @@ namespace TangramProject
             Size = new Size(Width, Height);
             canvas.Width = Width;
             canvas.Height = Height;
+
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
         }
 
     }

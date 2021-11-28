@@ -17,16 +17,25 @@ namespace Tangram.AppWindows
         {
             this.mainWindow = mainWindow;
             InitializeComponent();
+
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
+
             this.scale = scale;
             textBox1.Text = scale.ToString();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            scale = int.Parse(textBox1.Text);
-            Close();
+            if (int.Parse(textBox1.Text) >= 65 && int.Parse(textBox1.Text) <= 200)
+            {
+                scale = int.Parse(textBox1.Text);
+                Close();
+            }
+            else
+                MessageBox.Show("Please type in a number within the specified limit: 65% - 200%");
         }
-
 
     }
 }

@@ -5,6 +5,7 @@ using System.Drawing;
 using TangramProject.Classes.Pieces;
 using TangramProject.Classes.GraphicsExtensions;
 using Tangram.Classes.Game;
+using System.Diagnostics;
 
 namespace TangramProject.Classes.Game
 {
@@ -23,7 +24,7 @@ namespace TangramProject.Classes.Game
         public Tan square;
         public Tan parallelogram;
 
-        public DateTime timeIntoGame;
+        public Stopwatch timeIntoGame;
 
         public readonly double scale;
 
@@ -41,7 +42,6 @@ namespace TangramProject.Classes.Game
                 (float)(map.X + map.sideA + 10),
                 -65,
                 scale);
-
 
             largeTriangle2 = new TanTriangle(
                 TanTriangleSize.LARGE, Color.Orange,
@@ -99,7 +99,7 @@ namespace TangramProject.Classes.Game
             };
 
             winChecker = new WinConditionChecker(setOfTans, map, scale);
-            timeIntoGame = new DateTime(0);
+            timeIntoGame = new Stopwatch();
         }
 
         public Bitmap GetBitmapOfShape(int i)
