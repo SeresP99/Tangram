@@ -29,16 +29,11 @@ namespace TangramProject
 
         public Tangram()
         {
-            SizeSettingWindow settingWindow = new SizeSettingWindow(scale);
+            SizeSettingWindow settingWindow = new SizeSettingWindow(scale, this);
             settingWindow.ShowDialog();
             scale = settingWindow.scale;
-            
             InitializeComponent();
-            Width = (int)(scale * (Width / 100));
-            Height = (int)(scale * (Height / 100));
-            Size = new Size(Width, Height);
-            canvas.Width = Width;
-            canvas.Height = Height;
+            setSize();
             game = new Classes.Game.Tangram(scale);
         }
 
@@ -85,7 +80,7 @@ namespace TangramProject
                 case MouseButtons.Left:
                     gotcha = false;
                     if (game.winChecker.CheckForWinCondition())
-                        label1.Text = "SUCCESS";
+                        MessageBox.Show("You have succeeded!" + "\n" + "Time you took: " + timer1.ToString());
                     else
                         label1.Text = "Checking...";
                     break;
@@ -127,8 +122,18 @@ namespace TangramProject
 
         private void timer_Tick(object sender, EventArgs e)
         {
-
+            game.timeIntoGame.AddSeconds(1);
         }
+
+        private void setSize()
+        {
+            Width = (int)(scale * (Width / 100));
+            Height = (int)(scale * (Height / 100));
+            Size = new Size(Width, Height);
+            canvas.Width = Width;
+            canvas.Height = Height;
+        }
+
     }
 }
 

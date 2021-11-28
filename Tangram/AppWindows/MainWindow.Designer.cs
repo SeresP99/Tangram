@@ -53,13 +53,13 @@ namespace TangramProject
             // 
             // timer1
             // 
-            this.timer1.Interval = 10;
+            this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1069, 639);
+            this.label1.Location = new System.Drawing.Point(734, 408);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(66, 15);
             this.label1.TabIndex = 1;

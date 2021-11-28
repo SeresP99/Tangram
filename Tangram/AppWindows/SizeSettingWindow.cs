@@ -11,8 +11,11 @@ namespace Tangram.AppWindows
     public partial class SizeSettingWindow : Form
     {
         public double scale;
-        public SizeSettingWindow(double scale)
+        TangramProject.Tangram mainWindow;
+
+        public SizeSettingWindow(double scale, TangramProject.Tangram mainWindow)
         {
+            this.mainWindow = mainWindow;
             InitializeComponent();
             this.scale = scale;
             textBox1.Text = scale.ToString();
@@ -23,6 +26,7 @@ namespace Tangram.AppWindows
             scale = int.Parse(textBox1.Text);
             Close();
         }
+
 
     }
 }

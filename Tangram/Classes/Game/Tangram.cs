@@ -23,6 +23,8 @@ namespace TangramProject.Classes.Game
         public Tan square;
         public Tan parallelogram;
 
+        public DateTime timeIntoGame;
+
         public readonly double scale;
 
         public Tan[] setOfTans;
@@ -32,13 +34,58 @@ namespace TangramProject.Classes.Game
         {
             this.scale = scale;
             map = new Map(scale, 25, 25);
-            largeTriangle1 = new TanTriangle(TanTriangleSize.LARGE, Color.Blue, 50, 50, scale);
-            largeTriangle2 = new TanTriangle(TanTriangleSize.LARGE, Color.Orange, 50, 50, scale);
-            mediumTriangle = new TanTriangle(TanTriangleSize.MEDIUM, Color.Gray, 50, 200, scale);
-            smallTriangle1 = new TanTriangle(TanTriangleSize.SMALL, Color.Purple, 50, 400, scale);
-            smallTriangle2 = new TanTriangle(TanTriangleSize.SMALL, Color.Green, 50, 400, scale);
-            square = new TanSquare(Color.Orchid, 400, 50, scale);
-            parallelogram = new TanParallelogram(Color.DeepPink, 400, 200, scale);
+
+            double distance = scale * 1.5;
+            largeTriangle1 = new TanTriangle(
+                TanTriangleSize.LARGE, Color.Blue,
+                (float)(map.X + map.sideA + 10),
+                -65,
+                scale);
+
+
+            largeTriangle2 = new TanTriangle(
+                TanTriangleSize.LARGE, Color.Orange,
+                (float)(map.X + map.sideA + 25),
+                -65 + 5,
+                scale);
+
+            mediumTriangle = new TanTriangle(
+                TanTriangleSize.MEDIUM, Color.Gray,
+                (float)(map.X + map.sideA - 40),
+                (float)(map.sideA - 125),
+                scale);
+            mediumTriangle.Rotate();
+
+            square = new TanSquare(
+                Color.Orchid,
+                mediumTriangle.GetAbsolutePoint('B').X,
+                largeTriangle2.GetAbsolutePoint('C').Y - 30,
+                scale);
+            square.Rotate();
+
+            smallTriangle1 = new TanTriangle(
+                TanTriangleSize.SMALL, 
+                Color.Purple,
+                square.GetAbsolutePoint('D').X + 5,
+                square.GetAbsolutePoint('D').Y - 15,
+                scale);
+            smallTriangle1.Rotate180();
+
+            smallTriangle2 = new TanTriangle(
+                TanTriangleSize.SMALL,
+                Color.Green,
+                square.GetAbsolutePoint('D').X,
+                square.GetAbsolutePoint('D').Y - 10,
+                scale);
+            smallTriangle2.Rotate180();
+
+            parallelogram = new TanParallelogram(
+                Color.DeepPink,
+                largeTriangle2.GetAbsolutePoint('B').X - 30,
+                largeTriangle2.GetAbsolutePoint('B').Y, 
+                scale);
+            parallelogram.Rotate();
+            parallelogram.Rotate();
 
             setOfTans = new Tan[7]
             {
@@ -52,6 +99,7 @@ namespace TangramProject.Classes.Game
             };
 
             winChecker = new WinConditionChecker(setOfTans, map, scale);
+            timeIntoGame = new DateTime(0);
         }
 
         public Bitmap GetBitmapOfShape(int i)

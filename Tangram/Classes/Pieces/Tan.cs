@@ -35,6 +35,13 @@ namespace TangramProject.Classes.Pieces
         public abstract bool IsPointInArea(Point p);
         public abstract void Move(Point cursorLocation, float dx, float dy);
         public abstract void Rotate();
+        public void Rotate180()
+        {
+            Rotate();
+            Rotate();
+            Rotate();
+            Rotate();
+        }
         public PointF GetAbsolutePoint(char pointLetter)
         {
             switch (pointLetter)
