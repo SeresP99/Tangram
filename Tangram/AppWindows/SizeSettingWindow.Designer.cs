@@ -122,6 +122,7 @@ namespace Tangram.AppWindows
             this.Controls.Add(this.textBox1);
             this.Name = "SizeSettingWindow";
             this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SizeSettingWindow_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
